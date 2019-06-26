@@ -8,6 +8,6 @@
   	<module>SeedSystemWeb</module>
   	<module>SeedSystemBusiness</module>
   	<module>SeedSystemDao</module>
-  	<module>SeedSystemClient</module>
+  	<module>SeedSystemCommon</module>
   </modules>
 </project>
