@@ -90,9 +90,12 @@
 		    <artifactId>postgresql</artifactId>
 		    <version>42.2.5</version>
 		</dependency>
-		
-		
-		
+
+		<dependency>
+			<groupId>com.seedsystem</groupId>
+			<artifactId>SeedSystemCommon</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
