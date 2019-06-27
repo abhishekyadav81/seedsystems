@@ -40,8 +40,6 @@ public class User {//extends AbstractEntity {
   @Column(name = "salt")
   private String salt;
 
-
-  
   public String getSalt() {
     return salt;
   }

@@ -1,5 +1,7 @@
 package com.seedsystem.controller;
 
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.seedsystem.common.RegisterResponse;
+import com.seedsystem.common.exception.NoSuchUserException;
 import com.seedsystem.common.model.LoginRequest;
 import com.seedsystem.common.model.LoginResponse;
 import com.seedsystem.common.model.RegisterRequest;
+import com.seedsystem.common.model.RegisterResponse;
 import com.seedsystem.common.model.Response;
 import com.seedsystem.common.util.Messages;
 import com.seedsystem.service.AuthenticationService;
@@ -53,7 +56,13 @@ public class UserController {
 	public Response login (@RequestBody(required = true) final LoginRequest loginRequest,
 		      @RequestHeader("X-Origin") String clientHostName) {
 
-		  LoginResponse response = authService.authenticate(loginRequest);
+		  LoginResponse response;
+		try {
+			response = authService.authenticate(loginRequest);
+		} catch (NoSuchUserException e) {
+			e.printStackTrace();
+			response = new LoginResponse(false);
+		}
 		  
 		  if(response.getAuthenticated()) {
 			  return new Response(HttpStatus.OK.value(), messages.get("AUTHENTICATION_SUCCESSFUL"), response);
