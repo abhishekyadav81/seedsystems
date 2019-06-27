@@ -14,7 +14,7 @@ import com.seedsystem.repository.UserRepository;
 import com.seedsystem.service.AuthenticationService;
 
 @Service
-@Transactional(transactionManager="")
+@Transactional(transactionManager="seedsystemTransactionManager")
 public class AuthenticationServiceImpl implements AuthenticationService {
 	
 	@Autowired

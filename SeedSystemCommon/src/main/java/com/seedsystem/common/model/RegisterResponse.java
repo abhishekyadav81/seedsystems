@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RegisterResponse {
 
+	private Integer generatedUserId;
 	private Boolean userAlreadyExists = false;
 	private Boolean userRegisteredSuccessfully=false;
 
@@ -21,6 +22,12 @@ public class RegisterResponse {
 		this.userRegisteredSuccessfully = userRegisteredSuccessfully;
 	}
 	
+	public Integer getGeneratedUserId() {
+		return generatedUserId;
+	}
+	public void setGeneratedUserId(Integer generatedUserId) {
+		this.generatedUserId = generatedUserId;
+	}
 	
 	
 }

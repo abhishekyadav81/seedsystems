@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 
 
-@PropertySource(value = {"classpath:seedsystem-application-${spring.profiles.active}.properties" })
+@PropertySource(value = {"classpath:seedsystem-application-dev.properties" })
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 
 public class SeedSystemApplication {

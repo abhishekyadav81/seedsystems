@@ -24,7 +24,7 @@
 
 				<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 					<!-- daily rollover -->
-					<fileNamePattern>ppsweb.tenant-${X-TenantID}.%d{yyyy-MM-dd}.log
+					<fileNamePattern>seedsystem.%d{yyyy-MM-dd}.log
 					</fileNamePattern>
 
 					<!-- keep 90 days' worth of history capped at 3GB total size -->
