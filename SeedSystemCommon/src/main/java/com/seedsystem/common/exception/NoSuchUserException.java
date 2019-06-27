@@ -2,6 +2,11 @@ package com.seedsystem.common.exception;
 
 public class NoSuchUserException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9076069889140934759L;
+
 	public NoSuchUserException() {
 		super();
 	}

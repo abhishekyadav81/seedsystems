@@ -1,7 +1,5 @@
 package com.seedsystem.controller;
 
-import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -84,7 +82,7 @@ public class UserController {
 
 		  RegisterResponse response = userService.register(registerRequest);
 		  
-		  if(response.getSuccessful()) {
+		  if(response.getUserRegisteredSuccessfully()) {
 			  return new Response(HttpStatus.CREATED.value(), messages.get("REGISTRATION_SUCCESSFUL"), response);
 		  } else {
 			  return new Response(HttpStatus.UNAUTHORIZED.value(), messages.get("REGISTRATION_FAILED"), response);

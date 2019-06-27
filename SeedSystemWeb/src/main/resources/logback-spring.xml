@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<!-- You can override this to have a custom pattern -->
+	<property name="SS_APP_LOG_PATH"
+		value="${SS_APP_LOG_PATH:-${LOG_PATH:-${java.io.tmpdir:-/tmp}/}}" />
+	<appender name="FILE" class="ch.qos.logback.classic.sift.SiftingAppender">
+
+		<discriminator>
+			<key>X-TenantID</key>
+			<defaultValue>1</defaultValue>
+		</discriminator>
+
+
+		<sift>
+
+			<appender name="FILE"
+				class="ch.qos.logback.core.rolling.RollingFileAppender">
+				<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+					<pattern>%d{MM:dd HH:mm:ss.SSS} [%t] [%level] [%logger{36}] -
+						%msg%n</pattern>
+				</encoder>
+
+
+				<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+					<!-- daily rollover -->
+					<fileNamePattern>ppsweb.tenant-${X-TenantID}.%d{yyyy-MM-dd}.log
+					</fileNamePattern>
+
+					<!-- keep 90 days' worth of history capped at 3GB total size -->
+					<maxHistory>90</maxHistory>
+					<totalSizeCap>3GB</totalSizeCap>
+
+				</rollingPolicy>
+
+				<triggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+					<MaxFileSize>50MB</MaxFileSize>
+				</triggeringPolicy>
+
+			</appender>
+
+		</sift>
+
+	</appender>
+
+
+<!--   <logger name="com.zaxxer" level="DEBUG" additivity="true" >
+		<appender-ref ref="FILE" />
+	</logger> -->
+
+	<logger name="org.springframework.web" level="ERROR" additivity="false" >
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="com.seedsystem" level="INFO" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate" level="ERROR" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>
