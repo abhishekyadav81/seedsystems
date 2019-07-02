@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "User.Role")
+@Table(name = "role", schema="usernew")
 public class Role {//extends AbstractEntity {
 
   @Id

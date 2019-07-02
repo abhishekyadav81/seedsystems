@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@Table(name = "User.User")
+@Table(name = "user",schema="usernew")
 
 public class User {//extends AbstractEntity {
 
@@ -28,32 +28,18 @@ public class User {//extends AbstractEntity {
   @Column(name = "user_id", unique = true, nullable = false)
   private int userId;
 
-  @Column(name = "username")
-  private String userName;
-  
-  @Column(name = "password")
+  @Column(name = "user_password")
   private String password;
 
-  @Column(name = "email")
+  @Column(name = "email", unique = true, nullable = false)
   private String email;
   
   @Column(name = "salt")
   private String salt;
 
-  public String getSalt() {
-    return salt;
-  }
-
-  public void setSalt(String salt) {
-    this.salt = salt;
-  }
-
-
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<UserRole> userRoles;
-
-  
 
   @Column(name = "created_on")
   @Temporal(TemporalType.TIMESTAMP)
@@ -62,6 +48,16 @@ public class User {//extends AbstractEntity {
   @Column(name = "last_login")
   @Temporal(TemporalType.TIMESTAMP)
   private Date dateLastLogin;
+
+  
+  
+  public String getSalt() {
+	    return salt;
+  }
+
+  public void setSalt(String salt) {
+    this.salt = salt;
+  }
   
   
      /**
@@ -92,14 +88,6 @@ public class User {//extends AbstractEntity {
     return password;
   }
 
-  /**
-   * Return the userName.
-   * 
-   * @return the userName
-   */
-  public String getUserName() {
-    return userName;
-  }
 
   
   /**
@@ -144,16 +132,6 @@ public class User {//extends AbstractEntity {
     this.password = password;
   }
 
-  /**
-   * Set the userName.
-   * 
-   * @param userName
-   *          the userName to set
-   */
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
 
   
   /**
@@ -165,6 +143,22 @@ public class User {//extends AbstractEntity {
   public void setUserRoles(Set<UserRole> userRoles) {
     this.userRoles = userRoles;
   }
+
+public String getEmail() {
+	return email;
+}
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
+public Date getDateLoginCreatedOn() {
+	return dateLoginCreatedOn;
+}
+
+public void setDateLoginCreatedOn(Date dateLoginCreatedOn) {
+	this.dateLoginCreatedOn = dateLoginCreatedOn;
+}
 
  
 }

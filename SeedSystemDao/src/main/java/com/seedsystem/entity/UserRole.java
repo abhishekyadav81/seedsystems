@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 /**
  */
 @Entity
-@Table(name = "User.UserRole")
+@Table(name = "userrole", schema="usernew")
 public class UserRole {//extends AbstractEntity {
   
   

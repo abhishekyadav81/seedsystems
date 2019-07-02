@@ -24,7 +24,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	public LoginResponse authenticate(LoginRequest loginRequest) throws NoSuchUserException {
 		
 		LoginResponse loginResponse = new LoginResponse(false);
-		User user = userRepository.findByUserName(loginRequest.getEmailUserId());
+		User user = userRepository.findByEmail(loginRequest.getEmailUserId());
 		if(user == null) {
 			throw new NoSuchUserException("User Id does not exist");
 		} else {

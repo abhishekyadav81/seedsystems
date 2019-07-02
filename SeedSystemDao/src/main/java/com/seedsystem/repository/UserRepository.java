@@ -26,7 +26,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
    *          {@link String}
    * @return User {@link User}
    */
-  User findByUserName(String userName);
+  User findByEmail(String emailId);
 
   /**
    * This method is used to fetch User by Id on the basis of Entity graph.
