@@ -33,23 +33,19 @@ public class UserServiceImpl implements UserService {
 			registerResponse.setUserRegisteredSuccessfully(false);
 			return registerResponse;
 		} else {
-		
-		
-		User user = new User();
-		user.setEmail(registerRequest.getEmailUserId());
-		user.setSalt(AuthUtil.generateSalt(10));
-		user.setDateLoginCreatedOn(Calendar.getInstance().getTime());
-		
-		String passwordWithSalt = registerRequest.getConfirmedPassword().concat(user.getSalt());
-		user.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
-		
-		User savedUser = userRepository.save(user);
-		
-		
-		registerResponse.setGeneratedUserId(savedUser.getUserId());
-		registerResponse.setUserRegisteredSuccessfully(true);
-		
-		return registerResponse;
+			User user = new User();
+			user.setEmail(registerRequest.getEmailUserId());
+			user.setSalt(AuthUtil.generateSalt(10));
+			user.setDateLoginCreatedOn(Calendar.getInstance().getTime());
+			
+			String passwordWithSalt = registerRequest.getConfirmedPassword().concat(user.getSalt());
+			user.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
+			
+			User savedUser = userRepository.save(user);
+			registerResponse.setGeneratedUserId(savedUser.getUserId());
+			registerResponse.setUserRegisteredSuccessfully(true);
+			
+			return registerResponse;
 		}
 	}
 
