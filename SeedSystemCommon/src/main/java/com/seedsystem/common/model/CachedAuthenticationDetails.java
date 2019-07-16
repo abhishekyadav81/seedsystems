@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LoginResponse implements Serializable{
+public class CachedAuthenticationDetails implements Serializable{
 	
 	/**
 	 * 
@@ -16,8 +16,13 @@ public class LoginResponse implements Serializable{
 	
 	private String token;
 	
+	private String userName;
 	
-	public LoginResponse(Boolean authenticated) {
+	private String password;
+	
+	private String salt;
+	
+	public CachedAuthenticationDetails(Boolean authenticated) {
 		this.authenticated=authenticated;
 	}
 
@@ -37,5 +42,29 @@ public class LoginResponse implements Serializable{
 		this.token = token;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+	
 
 }

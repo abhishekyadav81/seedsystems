@@ -19,6 +19,8 @@ import com.seedsystem.common.util.Messages;
 import com.seedsystem.service.AuthenticationService;
 import com.seedsystem.service.UserService;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -38,10 +40,21 @@ public class UserController {
 	@Autowired
 	private Messages messages;
 	
-	@RequestMapping(value="/test")
+	@RequestMapping(value="/test",method = RequestMethod.GET)
 	public String testIt() {
 		return "IT IS RUNNING";
 	}
+
+	  
+	  @ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "Encrypted hash value",
+	      dataType = "string", required = true, paramType = "header") })
+
+	@RequestMapping(value="/restricted",method = RequestMethod.GET)
+	public String restrictedMethod() {
+		return "Successful Response From Restricted Method";
+	}
+	
+	
 	
 	  @RequestMapping(value = "/login", method = RequestMethod.POST,
 		      produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)

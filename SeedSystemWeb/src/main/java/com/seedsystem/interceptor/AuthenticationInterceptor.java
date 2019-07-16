@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.seedsystem.common.exception.SeedSystemException;
+import com.seedsystem.common.model.CachedAuthenticationDetails;
 import com.seedsystem.common.model.LoginResponse;
 import com.seedsystem.common.util.AppConstants;
 import com.seedsystem.common.util.CacheManager;
@@ -43,21 +44,23 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     logger.info("Entered into preHandle");
     if (httpServletRequest.getHeader("Authorization") == null) {
       logger.error("Invalid header parameters");
-      httpServletResponse.setStatus(401);
       throw new SeedSystemException(HttpStatus.UNAUTHORIZED, "Access Denied");
 
     } else {
 
-      String encryptedTokenFromClient = httpServletRequest.getHeader("Authorization"); 
+      String encryptedTokenFromClient = httpServletRequest.getHeader("Authorization");
+      String jwtToken = null;
       //Decrypt the JWt Token
+      try {
+    	   jwtToken = Encryptor.decrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, encryptedTokenFromClient);
+      } catch(SeedSystemException ex) {
+    	  throw new SeedSystemException(HttpStatus.UNAUTHORIZED, "Access Denied Invalid Auth Header");      }
       
-      String jwtToken = Encryptor.decrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, encryptedTokenFromClient);
+      CachedAuthenticationDetails cachedAuth = cacheManager.get(AppConstants.AUTHENTICATION_CACHE, jwtToken, CachedAuthenticationDetails.class); 
       
-      LoginResponse loginResponse = cacheManager.get(AppConstants.AUTHENTICATION_CACHE, jwtToken, LoginResponse.class); 
-      
-      if (loginResponse == null || !jwtTokenUtil.validateToken(jwtToken,loginResponse.getUserName())) {
+      if (cachedAuth == null || !jwtTokenUtil.validateToken(jwtToken,cachedAuth.getUserName()+cachedAuth.getPassword()+cachedAuth.getSalt())) {
     	  logger.error("Invalid Token, Object not found in Cache");
-          throw new SeedSystemException(HttpStatus.UNAUTHORIZED, "Access Denied");
+          throw new SeedSystemException(HttpStatus.UNAUTHORIZED, "Access Denied Invalid Token");
         }
       } 
     

@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().httpStrictTransportSecurity().includeSubDomains(true).maxAgeInSeconds(3600);
 		http.headers().xssProtection().disable();
 
-		String[] excludePaths = { "/webjars/springfox-swagger-ui/**", "/configuration/ui", "/configuration/security",
+		String[] excludePaths = { "/webjars/springfox-swagger-ui/**", 
 				"/swagger-ui.html", "/error", "/swagger-resources", "/swagger-resources/**", "/v2/api-docs",
 				"/user/login", "/user/register", "/version", "/users/passwords/forget-password" };
 

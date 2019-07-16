@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.seedsystem.common.exception.NoSuchUserException;
+import com.seedsystem.common.model.CachedAuthenticationDetails;
 import com.seedsystem.common.model.LoginRequest;
 import com.seedsystem.common.model.LoginResponse;
 import com.seedsystem.common.util.AppConstants;
@@ -40,11 +41,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			String encryptedPassword = Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, loginRequest.getPassword().concat(user.getSalt()));
 			if(encryptedPassword.equals(user.getPassword())) {
 				loginResponse.setAuthenticated(true);
-				loginResponse.setUserName(loginRequest.getEmailUserId());
-				String jwtToken = jwtTokenUtil.generateToken(loginRequest.getEmailUserId()+loginRequest.getPassword()+user.getSalt());
+				String jwtToken = jwtTokenUtil.generateToken(loginRequest.getEmailUserId()+user.getPassword()+user.getSalt());
 				String encryptedJwtToken = Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, jwtToken);				
-				cacheManager.put(AppConstants.AUTHENTICATION_CACHE, jwtToken, loginResponse);
+				
 				loginResponse.setToken(encryptedJwtToken);
+				
+				CachedAuthenticationDetails authDetails = new CachedAuthenticationDetails(true);
+				authDetails.setPassword(user.getPassword());
+				authDetails.setSalt(user.getSalt());
+				authDetails.setToken(jwtToken);
+				authDetails.setUserName(user.getEmail());
+				cacheManager.put(AppConstants.AUTHENTICATION_CACHE, jwtToken, authDetails);
+				
 			}
 		}
 		return loginResponse;
