@@ -11,7 +11,9 @@ import com.seedsystem.common.model.RegisterResponse;
 import com.seedsystem.common.util.AppConstants;
 import com.seedsystem.common.util.AuthUtil;
 import com.seedsystem.common.util.Encryptor;
+import com.seedsystem.entity.Farmer;
 import com.seedsystem.entity.User;
+import com.seedsystem.repository.FarmerRepository;
 import com.seedsystem.repository.UserRepository;
 import com.seedsystem.service.UserService;
 
@@ -21,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private FarmerRepository farmerRepository;
 
 	@Override
 	public RegisterResponse register(RegisterRequest registerRequest) {
@@ -33,7 +38,27 @@ public class UserServiceImpl implements UserService {
 			registerResponse.setUserRegisteredSuccessfully(false);
 			return registerResponse;
 		} else {
-			User user = new User();
+			
+			Farmer farmer = new Farmer();
+			farmer.setEmail(registerRequest.getEmailUserId());
+			farmer.setSalt(AuthUtil.generateSalt(10));
+			farmer.setAddress(registerRequest.getAddress());
+			farmer.setCity(registerRequest.getCity());
+			farmer.setCreditCardNumber(registerRequest.getCreditCardNumber());
+			farmer.setCvv(registerRequest.getCvv());
+			farmer.setLastName(registerRequest.getLastName());
+			farmer.setFirstName(registerRequest.getFirstName());
+			farmer.setOfficeNumber(registerRequest.getContactNumber());
+			farmer.setZip(registerRequest.getZip());
+			
+			String passwordWithSalt = registerRequest.getConfirmedPassword().concat(farmer.getSalt());
+			farmer.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
+			
+			Farmer savedFarmer = farmerRepository.save(farmer);
+			registerResponse.setGeneratedUserId(savedFarmer.getUserId());
+			registerResponse.setUserRegisteredSuccessfully(true);
+			
+			/*User user = new User();
 			user.setEmail(registerRequest.getEmailUserId());
 			user.setSalt(AuthUtil.generateSalt(10));
 			user.setDateLoginCreatedOn(Calendar.getInstance().getTime());
@@ -43,7 +68,7 @@ public class UserServiceImpl implements UserService {
 			
 			User savedUser = userRepository.save(user);
 			registerResponse.setGeneratedUserId(savedUser.getUserId());
-			registerResponse.setUserRegisteredSuccessfully(true);
+			registerResponse.setUserRegisteredSuccessfully(true);*/
 			
 			return registerResponse;
 		}
