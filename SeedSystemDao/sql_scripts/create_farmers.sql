@@ -1,30 +1,27 @@
--- Table: usernew.farmers
+-- Table: usernew.farmer
 
--- DROP TABLE usernew.farmers;
+-- DROP TABLE usernew.farmer;
 
-CREATE TABLE usernew.farmers
+CREATE TABLE usernew.farmer
 (
-    user_id character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(50) COLLATE pg_catalog."default" NOT NULL,
     password character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    "first name" character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    firstname character varying(50) COLLATE pg_catalog."default" NOT NULL,
     lastname character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    title character varying(50) COLLATE pg_catalog."default",
-    "office number" integer NOT NULL,
-    address character varying(50) COLLATE pg_catalog."default",
+    address character varying(50) COLLATE pg_catalog."default" NOT NULL,
     city character varying(20) COLLATE pg_catalog."default" NOT NULL,
     state character varying(10) COLLATE pg_catalog."default" NOT NULL,
-    county character varying(10) COLLATE pg_catalog."default" NOT NULL,
-    zip integer NOT NULL,
-    email character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    creditcardnumber integer NOT NULL,
-    expedate date NOT NULL,
-    cvv integer NOT NULL,
-    CONSTRAINT farmers_pkey PRIMARY KEY (user_id)
+    zip character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    officenumber character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    creditcardnumber character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    cvv character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    expdate date,
+    CONSTRAINT farmer_pkey PRIMARY KEY (email)
 )
 WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
 
-ALTER TABLE usernew.farmers
+ALTER TABLE usernew.farmer
     OWNER to postgres;
