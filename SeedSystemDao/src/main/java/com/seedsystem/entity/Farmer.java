@@ -1,18 +1,11 @@
 package com.seedsystem.entity;
 
-import java.util.Date;
-import java.util.Set;
+import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * 
@@ -23,14 +16,11 @@ import javax.persistence.TemporalType;
 
 public class Farmer {//extends AbstractEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "user_id", unique = true, nullable = false)
-  private int userId;
-
   @Column(name = "password")
   private String password;
 
+  @Id
+  //@GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "email", unique = true, nullable = false)
   private String email;
   
@@ -40,9 +30,6 @@ public class Farmer {//extends AbstractEntity {
   @Column(name = "lastname", unique = true, nullable = false)
   private String lastName;
   
-  @Column(name = "officenumber")
-  private String officeNumber;
-
   @Column(name = "address", unique = true, nullable = false)
   private String address;
   
@@ -52,54 +39,34 @@ public class Farmer {//extends AbstractEntity {
   @Column(name = "state")
   private String state;
 
-  @Column(name = "county", unique = true, nullable = false)
-  private String county;
-  
   @Column(name = "zip")
   private String zip;
+  
+  @Column(name = "officenumber")
+  private String contactNumber;
 
   @Column(name = "creditcardnumber", unique = true, nullable = false)
   private String creditCardNumber;
   
   @Column(name = "cvv")
   private String cvv;
-
-  @Column(name = "expdate", unique = true, nullable = false)
-  private String expdate;
   
-  @Column(name = "salt")
-  private String salt;
-
-
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<UserRole> userRoles;
-
-  
-
+  @Column(name = "expdate")
+  private Date expdate;
   
   
-  public String getSalt() {
-	    return salt;
-  }
 
-  public void setSalt(String salt) {
-    this.salt = salt;
-  }
-  
-  
-     /**
-   * Return the userId.
-   * 
-   * @return the userId
-   */
-  public int getUserId() {
-    return userId;
-  }
-
-  
+  public Date getExpdate() {
+	return expdate;
+}
 
 
-  /**
+public void setExpdate(Date expdate) {
+	this.expdate = expdate;
+}
+
+
+/**
    * Return the password.
    * 
    * @return the password
@@ -107,31 +74,6 @@ public class Farmer {//extends AbstractEntity {
   public String getPassword() {
     return password;
   }
-
-
-  
-  /**
-   * Return the userRoles.
-   * 
-   * @return the userRoles
-   */
-  public Set<UserRole> getUserRoles() {
-    return userRoles;
-  }
-
-  
-  /**
-   * Set the userId.
-   * 
-   * @param userId
-   *          the userId to set
-   */
-  public void setUserId(int userId) {
-    this.userId = userId;
-  }
-
- 
-
 
 
   /**
@@ -146,111 +88,101 @@ public class Farmer {//extends AbstractEntity {
 
 
   
-  /**
-   * Set the userRoles.
-   * 
-   * @param userRoles
-   *          the userRoles to set
-   */
-  public void setUserRoles(Set<UserRole> userRoles) {
-    this.userRoles = userRoles;
-  }
 
-public String getEmail() {
-	return email;
-}
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-public void setEmail(String email) {
-	this.email = email;
-}
 
-public String getFirstName() {
-	return firstName;
-}
+	public String getAddress() {
+		return address;
+	}
 
-public void setFirstName(String firstName) {
-	this.firstName = firstName;
-}
 
-public String getLastName() {
-	return lastName;
-}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-public void setLastName(String lastName) {
-	this.lastName = lastName;
-}
 
-public String getOfficeNumber() {
-	return officeNumber;
-}
+	public String getCity() {
+		return city;
+	}
 
-public void setOfficeNumber(String officeNumber) {
-	this.officeNumber = officeNumber;
-}
 
-public String getAddress() {
-	return address;
-}
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-public void setAddress(String address) {
-	this.address = address;
-}
 
-public String getCity() {
-	return city;
-}
+	public String getState() {
+		return state;
+	}
 
-public void setCity(String city) {
-	this.city = city;
-}
 
-public String getState() {
-	return state;
-}
+	public void setState(String state) {
+		this.state = state;
+	}
 
-public void setState(String state) {
-	this.state = state;
-}
 
-public String getCounty() {
-	return county;
-}
+	public String getZip() {
+		return zip;
+	}
 
-public void setCounty(String county) {
-	this.county = county;
-}
 
-public String getZip() {
-	return zip;
-}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
 
-public void setZip(String zip) {
-	this.zip = zip;
-}
 
-public String getCreditCardNumber() {
-	return creditCardNumber;
-}
+	public String getCreditCardNumber() {
+		return creditCardNumber;
+	}
 
-public void setCreditCardNumber(String creditCardNumber) {
-	this.creditCardNumber = creditCardNumber;
-}
 
-public String getCvv() {
-	return cvv;
-}
+	public void setCreditCardNumber(String creditCardNumber) {
+		this.creditCardNumber = creditCardNumber;
+	}
 
-public void setCvv(String cvv) {
-	this.cvv = cvv;
-}
 
-public String getExpdate() {
-	return expdate;
-}
+	public String getCvv() {
+		return cvv;
+	}
 
-public void setExpdate(String expdate) {
-	this.expdate = expdate;
-}
+
+	public void setCvv(String cvv) {
+		this.cvv = cvv;
+	}
+
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
 
 
 

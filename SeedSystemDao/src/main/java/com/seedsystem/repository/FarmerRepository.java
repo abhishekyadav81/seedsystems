@@ -10,7 +10,7 @@ import com.seedsystem.entity.User;
 
 
 /**
- * This Class is responsible for handling database operation related to User entity.
+ * This Class is responsible for handling database operation related to Farmer entity.
  *
  * @author Abhishek.Yadav
  * @see {@link User}
@@ -27,7 +27,7 @@ public interface FarmerRepository extends CrudRepository<Farmer, Integer> {
    *          {@link String}
    * @return User {@link User}
    */
-  User findByEmail(String emailId);
+	Farmer findByEmail(String emailId);
 
   /**
    * This method is used to fetch User by Id on the basis of Entity graph.
@@ -37,6 +37,6 @@ public interface FarmerRepository extends CrudRepository<Farmer, Integer> {
    *          {@link Integer}
    * @return {@link User}
    */
-  @EntityGraph(attributePaths = { "userRoles" })
-  User findByUserId(int userId);
+  //@EntityGraph(attributePaths = { "userRoles" })
+  //User findByUserId(int userId);
 }

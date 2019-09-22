@@ -1,5 +1,7 @@
 package com.seedsystem.common.model;
 
+
+
 import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -7,9 +9,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RegisterRequest {
 	
-	private String emailUserId;
+	private String email;
 	private String password;
-	private String confirmedPassword;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -19,26 +20,25 @@ public class RegisterRequest {
 	private String contactNumber;
 	private String creditCardNumber;
 	private String cvv;
-	private Date expDate;
+	private Date expdate;
 	
-	
-	public String getEmailUserId() {
-		return emailUserId;
+	public Date getExpdate() {
+		return expdate;
 	}
-	public void setEmailUserId(String emailUserId) {
-		this.emailUserId = emailUserId;
+	public void setExpdate(Date expdate) {
+		this.expdate = expdate;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public String getConfirmedPassword() {
-		return confirmedPassword;
-	}
-	public void setConfirmedPassword(String confirmedPassword) {
-		this.confirmedPassword = confirmedPassword;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -94,12 +94,7 @@ public class RegisterRequest {
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
-	public Date getExpDate() {
-		return expDate;
-	}
-	public void setExpDate(Date expDate) {
-		this.expDate = expDate;
-	}
+	
 	
 	
 

@@ -32,31 +32,33 @@ public class UserServiceImpl implements UserService {
 		
 		RegisterResponse registerResponse = new RegisterResponse();
 		//TODO Check if the user already exists , Can be a separate call later
-		User existingUser = userRepository.findByEmail(registerRequest.getEmailUserId());
-		if(existingUser != null) {
+		Farmer existingFarmer = farmerRepository.findByEmail(registerRequest.getEmail());
+		if(existingFarmer != null) {
 			registerResponse.setUserAlreadyExists(true);
 			registerResponse.setUserRegisteredSuccessfully(false);
 			return registerResponse;
 		} else {
 			
 			Farmer farmer = new Farmer();
-			farmer.setEmail(registerRequest.getEmailUserId());
-			farmer.setSalt(AuthUtil.generateSalt(10));
+			farmer.setEmail(registerRequest.getEmail());
+			//farmer.setSalt(AuthUtil.generateSalt(10));
 			farmer.setAddress(registerRequest.getAddress());
 			farmer.setCity(registerRequest.getCity());
+			farmer.setState(registerRequest.getState());
 			farmer.setCreditCardNumber(registerRequest.getCreditCardNumber());
 			farmer.setCvv(registerRequest.getCvv());
 			farmer.setLastName(registerRequest.getLastName());
 			farmer.setFirstName(registerRequest.getFirstName());
-			farmer.setOfficeNumber(registerRequest.getContactNumber());
+			farmer.setContactNumber(registerRequest.getContactNumber());
 			farmer.setZip(registerRequest.getZip());
-			
-			String passwordWithSalt = registerRequest.getConfirmedPassword().concat(farmer.getSalt());
-			farmer.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
-			
+			farmer.setPassword(registerRequest.getPassword());
 			Farmer savedFarmer = farmerRepository.save(farmer);
-			registerResponse.setGeneratedUserId(savedFarmer.getUserId());
 			registerResponse.setUserRegisteredSuccessfully(true);
+			
+			//String passwordWithSalt = registerRequest.getConfirmedPassword().concat(farmer.getSalt());
+			//farmer.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
+			//registerResponse.setGeneratedUserId(savedFarmer.getUserId());
+			
 			
 			/*User user = new User();
 			user.setEmail(registerRequest.getEmailUserId());
