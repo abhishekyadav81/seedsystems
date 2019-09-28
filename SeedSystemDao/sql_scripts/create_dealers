@@ -1,0 +1,18 @@
+-- Table: usernew.dealers
+
+-- DROP TABLE usernew.dealers;
+
+CREATE TABLE usernew.dealers
+(
+    dealername character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    "dealer number" character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    "dealer title" character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT dealers_pkey PRIMARY KEY (dealername, "dealer number")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE usernew.dealers
+    OWNER to postgres;

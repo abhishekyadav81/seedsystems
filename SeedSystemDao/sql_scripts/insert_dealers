@@ -1,0 +1,7 @@
+INSERT INTO usernew.dealers(
+	dealername, "dealer number", "dealer title")
+	VALUES ('DEF', '3142810719', 'Cornecius Seeds');
+	
+	INSERT INTO usernew.dealers(
+	dealername, "dealer number", "dealer title")
+	VALUES ('ABC', '2019365546', 'American Seeds');
