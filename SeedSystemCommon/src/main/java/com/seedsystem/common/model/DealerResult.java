@@ -3,29 +3,35 @@ package com.seedsystem.common.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DealerResult {
+public class DealerResult implements Cloneable {
 
-	private String dealerName;
-	public String getDealerName() {
-		return dealerName;
+	private String dealerTitle;
+	private String contactPerson;
+	private String contactNumber;
+	
+	
+	public String getDealerTitle() {
+		return dealerTitle;
 	}
-	public void setDealerName(String dealerName) {
-		this.dealerName = dealerName;
+	public void setDealerTitle(String dealerTitle) {
+		this.dealerTitle = dealerTitle;
 	}
-	public String getDealerContact() {
-		return dealerContact;
+	public String getContactPerson() {
+		return contactPerson;
 	}
-	public void setDealerContact(String dealerContact) {
-		this.dealerContact = dealerContact;
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
 	}
-	public String getDealerPhone() {
-		return dealerPhone;
+	public String getContactNumber() {
+		return contactNumber;
 	}
-	public void setDealerPhone(String dealerPhone) {
-		this.dealerPhone = dealerPhone;
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
 	}
-	private String dealerContact;
-	private String dealerPhone;
+	
+	
+	
+	
 
 	
 	

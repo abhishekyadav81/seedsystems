@@ -2,8 +2,6 @@ package com.seedsystem.common.model;
 
 
 
-import java.sql.Date;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

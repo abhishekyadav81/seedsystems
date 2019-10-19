@@ -21,12 +21,12 @@ import com.seedsystem.entity.User;
 public interface DealerRepository extends CrudRepository<Dealer, Integer> {
 
   /**
-   * This method is used to get the account on the basis of Email.
+   * This method is used to get the account on the basis of State and County.
    *
    * @param userName
    *          {@link String}
    * @return User {@link User}
    */
-  Dealer findbyStateAndCounty(String emailId);
+  Dealer findByStateAndCounty(String state,String county);
 
   }

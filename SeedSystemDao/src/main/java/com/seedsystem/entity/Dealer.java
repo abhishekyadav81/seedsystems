@@ -24,116 +24,70 @@ import javax.persistence.TemporalType;
 public class Dealer {//extends AbstractEntity {
 
   @Id
-  @Column(name = "dealername", unique = true, nullable = false)
-  private String dealerName;
-
-  @Column(name = "dealer number")
-  private String dealerNumber;
-
-  @Column(name = "dealer title", unique = true, nullable = false)
+  @Column(name = "dealertitle", unique = true, nullable = false)
   private String dealerTitle;
+  
+  @Column(name = "contactperson")
+  private String contactPerson;
+
+  @Column(name = "contactnumber", unique = true, nullable = false)
+  private String contactNumber;
   
   @Column(name = "state")
   private String state;
   
   @Column(name = "county")
   private String county;
-
-
   
-  
-  
-  public String getState() {
-	    return state;
-  }
-  
-  public String getCounty() {
-	    return county;
-  }
+  @Column(name = "crop")
+  private String crop;
 
-  
-  
-  
-     /**
-   * Return the userId.
-   * 
-   * @return the userId
-   */
-  public String getDealerTitle() {
-    return dealerTitle;
-  }
+	public String getDealerTitle() {
+		return dealerTitle;
+	}
+	
+	public void setDealerTitle(String dealerTitle) {
+		this.dealerTitle = dealerTitle;
+	}
+	
+	public String getContactPerson() {
+		return contactPerson;
+	}
+	
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
+	}
+	
+	public String getContactNumber() {
+		return contactNumber;
+	}
+	
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+	
+	public String getState() {
+		return state;
+	}
+	
+	public void setState(String state) {
+		this.state = state;
+	}
+	
+	public String getCounty() {
+		return county;
+	}
+	
+	public void setCounty(String county) {
+		this.county = county;
+	}
+	
+	public String getCrop() {
+		return crop;
+	}
+	
+	public void setCrop(String crop) {
+		this.crop = crop;
+	}
 
-  /**
-   * Return the dateLastLogin.
-   * 
-   * @return the dateLastLogin
-   */
-  public String getDealerNumber() {
-    return dealerNumber;
-  }
-
-
-  /**
-   * Return the password.
-   * 
-   * @return the password
-   */
-  public String getDealerName() {
-    return dealerName;
-  }
-
-
-  /**
-   * Set the userId.
-   * 
-   * @param userId
-   *          the userId to set
-   */
-  public void setDealerName(String dealerName) {
-    this.dealerName = dealerName;
-  }
-
-  /**
-   * Set the dateLastLogin.
-   * 
-   * @param dateLastLogin
-   *          the dateLastLogin to set
-   */
-  public void setDealerNumber(String dealerNumber) {
-    this.dealerNumber = dealerNumber;
-  }
-
-
-
-  /**
-   * Set the password.
-   * 
-   * @param password
-   *          the password to set
-   */
-  public void setDealerTitle(String dealerTitle) {
-    this.dealerTitle = dealerTitle;
-  }
-  
-  
-  public void setState(String state) {
-	    this.state = state;
-  }
-  
-  
-  /**
-   * Set the password.
-   * 
-   * @param password
-   *          the password to set
-   */
-  public void setCounty(String county) {
-    this.county = county;
-  }
-
-
-  
-  
-
- 
 }

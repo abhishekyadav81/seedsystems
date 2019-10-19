@@ -27,20 +27,22 @@ import com.seedsystem.service.UserService;
 public class SearchServiceImpl implements SearchService{
 
 	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
 	private DealerRepository dealerRepository;
 
 	@Override
 	public DealerResult searchDealer(SearchRequest searchRequest) {
 		
+		System.out.println("************  Inside Service ************");
+		
 		DealerResult dealerResult = new DealerResult();
 		//TODO Check if the user already exists , Can be a separate call later
-		Dealer dealers = dealerRepository.findbyStateAndCounty(searchRequest.getState());
-		dealerResult.setDealerContact(dealers.getDealerName());
-		dealerResult.setDealerName(dealers.getDealerTitle());
-		dealerResult.setDealerPhone(dealers.getDealerNumber());
+		Dealer dealers = dealerRepository.findByStateAndCounty(searchRequest.getState(),searchRequest.getCounty());
+		
+		System.out.println("************  Returned from Dao ************");
+		
+		dealerResult.setDealerTitle(dealers.getDealerTitle());
+		dealerResult.setContactPerson(dealers.getContactPerson());
+		dealerResult.setContactNumber(dealers.getContactNumber());
 		
 			
 		return dealerResult;
