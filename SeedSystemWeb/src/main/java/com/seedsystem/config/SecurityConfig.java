@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		String[] excludePaths = { "/webjars/springfox-swagger-ui/**", 
 				"/swagger-ui.html", "/error", "/swagger-resources", "/swagger-resources/**", "/v2/api-docs",
-				"/user/login", "/user/register", "/version", "/users/passwords/forget-password" };
+				"/user/login", "/user/register", "/version", "/users/passwords/forget-password","/search/test","/search/dealer" };
 
 		http.csrf().disable().authorizeRequests().antMatchers(excludePaths).permitAll().antMatchers(HttpMethod.OPTIONS)
 				.permitAll().antMatchers("/**/*").permitAll();

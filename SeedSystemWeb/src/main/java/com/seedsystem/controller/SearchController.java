@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.seedsystem.common.exception.NoSuchUserException;
+import com.seedsystem.common.model.DealerResult;
 import com.seedsystem.common.model.LoginRequest;
 import com.seedsystem.common.model.LoginResponse;
 import com.seedsystem.common.model.Response;
@@ -63,19 +64,43 @@ public class SearchController {
 	      @ApiResponse(code = 201, response = String.class, message = "User logged in Successfully"),
 	      @ApiResponse(code = 500, message = "Internal Error Occured"),
 	      @ApiResponse(code = 400, message = "Error in Request Data"),})
-	  public Response dealerSearch (@RequestBody(required = true) final SearchRequest searchRequest) {
+	  public DealerResult dealerSearch (@RequestBody(required = true) final SearchRequest searchRequest) {
 		  
 		  System.out.println("************  Inside Controller ************");
-		  //DealerResult dealers = searchService.searchDealer(searchRequest);
+		  DealerResult dealers = searchService.searchDealer(searchRequest);
 		  
-		  LoginResponse response = null;
-		  
-		  return new Response(HttpStatus.OK.value(), messages.get("AUTHENTICATION_SUCCESSFUL"), response);
-		  
-		  
-		  //return dealers;
+		  return dealers;
 		  
 		  
 	}
 	  
+	  @RequestMapping(value = "/login", method = RequestMethod.POST,
+		      produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+		  @ApiOperation(value = "Login Api for User")
+		  @ApiResponses({
+		      @ApiResponse(code = 201, response = String.class, message = "User logged in Successfully"),
+		      @ApiResponse(code = 500, message = "Internal Error Occured"),
+		      @ApiResponse(code = 400, message = "Error in Request Data"),
+		  })
+	public Response login (@RequestBody(required = true) final LoginRequest loginRequest,
+		      @RequestHeader("X-Origin") String clientHostName) {
+
+		  System.out.println("************  Inside search login Controller ************");
+		  LoginResponse response;
+		try {
+			response = authService.authenticate(loginRequest);
+		} catch (NoSuchUserException e) {
+			e.printStackTrace();
+			response = new LoginResponse(false);
+		}
+		  
+		  if(response.getAuthenticated()) {
+			  return new Response(HttpStatus.OK.value(), messages.get("AUTHENTICATION_SUCCESSFUL"), response);
+		  } else {
+			  return new Response(HttpStatus.UNAUTHORIZED.value(), messages.get("AUTHENTICATION_FAILURE"), response);
+		  }
+		
+	}
+	
+	
 }
