@@ -1,7 +1,3 @@
 INSERT INTO usernew.dealers(
-	dealername, "dealer number", "dealer title")
-	VALUES ('DEF', '3142810719', 'Cornecius Seeds');
-	
-	INSERT INTO usernew.dealers(
-	dealername, "dealer number", "dealer title")
-	VALUES ('ABC', '2019365546', 'American Seeds');
+	dealertitle, contactperson, contactnumber, state, county, crop)
+	VALUES ('AgVenture', 'John Doe', '314-567-8895', 'MO', 'Alton', 'Corn');
