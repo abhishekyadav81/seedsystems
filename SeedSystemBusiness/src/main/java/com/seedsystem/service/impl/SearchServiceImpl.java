@@ -25,9 +25,6 @@ public class SearchServiceImpl implements SearchService{
 		dealerResult.setContactPerson(dealers.getContactPerson());
 		dealerResult.setContactNumber(dealers.getContactNumber());
 		return dealerResult;
-		
 	}
-
-	
 
 }

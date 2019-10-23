@@ -16,6 +16,7 @@ CREATE TABLE usernew.farmer
     creditcardnumber character varying(10) COLLATE pg_catalog."default" NOT NULL,
     cvv character varying(10) COLLATE pg_catalog."default" NOT NULL,
     expdate date,
+    salt character varying(30) COLLATE pg_catalog."default",
     CONSTRAINT farmer_pkey PRIMARY KEY (email)
 )
 WITH (

@@ -29,9 +29,6 @@ public class SearchController {
 	private SearchService searchService;
 
 	@Autowired
-	private AuthenticationService authService;
-
-	@Autowired
 	private Messages messages;
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
