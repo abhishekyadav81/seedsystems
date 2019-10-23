@@ -20,13 +20,15 @@ public class Farmer {//extends AbstractEntity {
   private String password;
 
   @Id
-  //@GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "email", unique = true, nullable = false)
   private String email;
   
   @Column(name = "firstname")
   private String firstName;
-
+  
+  @Column(name="salt")
+  private String salt;
+  
   @Column(name = "lastname", unique = true, nullable = false)
   private String lastName;
   
@@ -181,6 +183,16 @@ public void setExpdate(Date expdate) {
 
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
+	}
+
+
+	public String getSalt() {
+		return salt;
+	}
+
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 

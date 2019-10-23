@@ -1,7 +1,5 @@
 package com.seedsystem.service.impl;
 
-import java.util.Calendar;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,18 +10,13 @@ import com.seedsystem.common.util.AppConstants;
 import com.seedsystem.common.util.AuthUtil;
 import com.seedsystem.common.util.Encryptor;
 import com.seedsystem.entity.Farmer;
-import com.seedsystem.entity.User;
 import com.seedsystem.repository.FarmerRepository;
-import com.seedsystem.repository.UserRepository;
 import com.seedsystem.service.UserService;
 
 @Service
 @Transactional(transactionManager="seedsystemTransactionManager")
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserRepository userRepository;
-	
 	@Autowired
 	private FarmerRepository farmerRepository;
 
@@ -41,7 +34,7 @@ public class UserServiceImpl implements UserService {
 			
 			Farmer farmer = new Farmer();
 			farmer.setEmail(registerRequest.getEmail());
-			//farmer.setSalt(AuthUtil.generateSalt(10));
+			farmer.setSalt(AuthUtil.generateSalt(10));
 			farmer.setAddress(registerRequest.getAddress());
 			farmer.setCity(registerRequest.getCity());
 			farmer.setState(registerRequest.getState());
@@ -55,22 +48,9 @@ public class UserServiceImpl implements UserService {
 			Farmer savedFarmer = farmerRepository.save(farmer);
 			registerResponse.setUserRegisteredSuccessfully(true);
 			
-			//String passwordWithSalt = registerRequest.getConfirmedPassword().concat(farmer.getSalt());
-			//farmer.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
-			//registerResponse.setGeneratedUserId(savedFarmer.getUserId());
-			
-			
-			/*User user = new User();
-			user.setEmail(registerRequest.getEmailUserId());
-			user.setSalt(AuthUtil.generateSalt(10));
-			user.setDateLoginCreatedOn(Calendar.getInstance().getTime());
-			
-			String passwordWithSalt = registerRequest.getConfirmedPassword().concat(user.getSalt());
-			user.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
-			
-			User savedUser = userRepository.save(user);
-			registerResponse.setGeneratedUserId(savedUser.getUserId());
-			registerResponse.setUserRegisteredSuccessfully(true);*/
+			String passwordWithSalt = registerRequest.getConfirmedPassword().concat(farmer.getSalt());
+			farmer.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
+			registerResponse.setRegisteredEmailId(savedFarmer.getEmail());
 			
 			return registerResponse;
 		}

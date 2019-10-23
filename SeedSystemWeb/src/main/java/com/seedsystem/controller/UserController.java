@@ -42,7 +42,7 @@ public class UserController {
 	
 	@RequestMapping(value="/test",method = RequestMethod.GET)
 	public String testIt() {
-		return "IT IS RUNNING";
+		return "USER SERVICE IS RUNNING";
 	}
 
 	  
@@ -87,7 +87,7 @@ public class UserController {
 		      produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
 		  @ApiOperation(value = "Register Api for User")
 		  @ApiResponses({
-		      @ApiResponse(code = 201, response = String.class, message = "User logged in Successfully"),
+		      @ApiResponse(code = 201, response = String.class, message = "User registered Successfully"),
 		      @ApiResponse(code = 500, message = "Internal Error Occured"),
 		      @ApiResponse(code = 400, message = "Error in Request Data"),})
 	  public Response login (@RequestBody(required = true) final RegisterRequest registerRequest,

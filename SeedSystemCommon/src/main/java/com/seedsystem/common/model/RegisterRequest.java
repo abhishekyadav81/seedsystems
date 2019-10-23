@@ -11,6 +11,7 @@ public class RegisterRequest {
 	
 	private String email;
 	private String password;
+	private String confirmedPassword;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -93,6 +94,12 @@ public class RegisterRequest {
 	}
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
+	}
+	public String getConfirmedPassword() {
+		return confirmedPassword;
+	}
+	public void setConfirmedPassword(String confirmedPassword) {
+		this.confirmedPassword = confirmedPassword;
 	}
 	
 	

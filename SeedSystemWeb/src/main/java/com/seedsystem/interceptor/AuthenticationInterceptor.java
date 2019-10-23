@@ -13,7 +13,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.seedsystem.common.exception.SeedSystemException;
 import com.seedsystem.common.model.CachedAuthenticationDetails;
-import com.seedsystem.common.model.LoginResponse;
 import com.seedsystem.common.util.AppConstants;
 import com.seedsystem.common.util.CacheManager;
 import com.seedsystem.common.util.Encryptor;
