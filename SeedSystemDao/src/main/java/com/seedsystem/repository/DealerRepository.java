@@ -1,7 +1,10 @@
 package com.seedsystem.repository;
 
-import org.springframework.data.jpa.repository.EntityGraph;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.seedsystem.entity.Dealer;
@@ -27,6 +30,10 @@ public interface DealerRepository extends CrudRepository<Dealer, Integer> {
    *          {@link String}
    * @return User {@link User}
    */
-  Dealer findByStateAndCounty(String state,String county);
+  List<Dealer> findByStateAndCounty(String state,String county);
+  
+  @Query("Select dealer from Dealer dealer WHERE dealer.state=:state and dealer.county=:county and dealer.crop in(:listOfCrops)")
+  List<Dealer> findByStateCountyAndCrops(@Param("state") String state, @Param("county") String county,
+		  @Param("listOfCrops") List<String> listOfCrops);
 
   }

@@ -1,5 +1,7 @@
 package com.seedsystem.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,7 +14,6 @@ import com.seedsystem.common.model.DealerResult;
 import com.seedsystem.common.model.Response;
 import com.seedsystem.common.model.SearchRequest;
 import com.seedsystem.common.util.Messages;
-import com.seedsystem.service.AuthenticationService;
 import com.seedsystem.service.SearchService;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -45,12 +46,12 @@ public class SearchController {
 	}
 
 	@RequestMapping(value = "/dealer", method = RequestMethod.POST, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-	@ApiOperation(value = "Register Api for User")
-	@ApiResponses({ @ApiResponse(code = 201, response = String.class, message = "User logged in Successfully"),
+	@ApiOperation(value = "Search Api to find the Dealers")
+	@ApiResponses({ @ApiResponse(code = 201, response = String.class, message = "Search Dealer Results returned Successfully"),
 			@ApiResponse(code = 500, message = "Internal Error Occured"),
 			@ApiResponse(code = 400, message = "Error in Request Data"), })
 	public Response dealerSearch(@RequestBody(required = true) final SearchRequest searchRequest) {
-		DealerResult dealers = searchService.searchDealer(searchRequest);
+		List<DealerResult> dealers = searchService.searchDealer(searchRequest);
 		Response response =  new Response(HttpStatus.OK.value(), messages.get("OK"), dealers);
 		return response;
 	}
