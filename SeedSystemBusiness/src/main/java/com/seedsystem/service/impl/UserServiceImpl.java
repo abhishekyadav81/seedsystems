@@ -44,12 +44,10 @@ public class UserServiceImpl implements UserService {
 			farmer.setFirstName(registerRequest.getFirstName());
 			farmer.setContactNumber(registerRequest.getContactNumber());
 			farmer.setZip(registerRequest.getZip());
-			farmer.setPassword(registerRequest.getPassword());
+			String passwordWithSalt = registerRequest.getPassword().concat(farmer.getSalt());
+			farmer.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
 			Farmer savedFarmer = farmerRepository.save(farmer);
 			registerResponse.setUserRegisteredSuccessfully(true);
-			
-			String passwordWithSalt = registerRequest.getConfirmedPassword().concat(farmer.getSalt());
-			farmer.setPassword(Encryptor.encrypt(AppConstants.ENCRYPTION_KEY, AppConstants.ENCRYPTION_INIT_VECTOR, passwordWithSalt));
 			registerResponse.setRegisteredEmailId(savedFarmer.getEmail());
 			
 			return registerResponse;

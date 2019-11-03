@@ -1,5 +1,7 @@
 package com.seedsystem.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -64,8 +66,7 @@ public class UserController {
 		      @ApiResponse(code = 500, message = "Internal Error Occured"),
 		      @ApiResponse(code = 400, message = "Error in Request Data"),
 		  })
-	public Response login (@RequestBody(required = true) final LoginRequest loginRequest,
-		      @RequestHeader("X-Origin") String clientHostName) {
+	public Response login (@RequestBody(required = true) final @Valid LoginRequest loginRequest) {
 
 		  LoginResponse response;
 		try {
@@ -90,8 +91,7 @@ public class UserController {
 		      @ApiResponse(code = 201, response = String.class, message = "User registered Successfully"),
 		      @ApiResponse(code = 500, message = "Internal Error Occured"),
 		      @ApiResponse(code = 400, message = "Error in Request Data"),})
-	  public Response login (@RequestBody(required = true) final RegisterRequest registerRequest,
-		      @RequestHeader("X-Origin") String clientHostName) {
+	  public Response register (@RequestBody(required = true) final RegisterRequest registerRequest) {
 
 		  RegisterResponse response = userService.register(registerRequest);
 		  

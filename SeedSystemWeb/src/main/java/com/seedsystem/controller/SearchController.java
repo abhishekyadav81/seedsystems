@@ -24,6 +24,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value = "/search")
+
 public class SearchController {
 
 	@Autowired

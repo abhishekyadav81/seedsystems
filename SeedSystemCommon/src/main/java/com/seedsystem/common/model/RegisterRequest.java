@@ -21,14 +21,9 @@ public class RegisterRequest {
 	private String contactNumber;
 	private String creditCardNumber;
 	private String cvv;
-	private Date expdate;
+	private Date expiryDate;
+	private Boolean trialUser;
 	
-	public Date getExpdate() {
-		return expdate;
-	}
-	public void setExpdate(Date expdate) {
-		this.expdate = expdate;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -100,6 +95,18 @@ public class RegisterRequest {
 	}
 	public void setConfirmedPassword(String confirmedPassword) {
 		this.confirmedPassword = confirmedPassword;
+	}
+	public Date getExpiryDate() {
+		return expiryDate;
+	}
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+	public Boolean getTrialUser() {
+		return trialUser;
+	}
+	public void setTrialUser(Boolean trialUser) {
+		this.trialUser = trialUser;
 	}
 	
 	
